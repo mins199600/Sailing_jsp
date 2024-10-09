@@ -9,7 +9,7 @@
         from Cust_info;
     </select>
     <!--검색쿼리-->
-    <select id="doSearch" resultType="com.boot.sailing_jsp.v2.vo.Cust_info">
+    <select id="doSerch" resultType="com.boot.sailing_jsp.v2.vo.Cust_info">
         SELECT no, cust_id, name, email, role,
         DATE_FORMAT(reg_day,'%Y.%m.%d') AS reg_day
         FROM cust_info

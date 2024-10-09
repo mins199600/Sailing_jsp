@@ -44,9 +44,9 @@ public class OrderConV2 {
 
     ){
 
-        log.info("strStartDate :"+strStartDate);
+        log.info("strStartDate :" + strStartDate);
 
-        List<Order_list> list = orderSvcV2.doSerch(strStartDate,strEndDate, strCoffee,strName );
+        List<Order_list> list = orderSvcV2.doSearch(strStartDate, strEndDate, strCoffee, strName);
 
         model.addAttribute("list", list);
 

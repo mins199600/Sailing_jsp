@@ -13,6 +13,4 @@ public class Order_list {
     private String name;
     private String reg_day;
 
-
-
 }

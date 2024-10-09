@@ -20,8 +20,8 @@ public class OrderSvcV2 {
     }
 
     /* 조회하기 */
-    public List<Order_list> doSerch(String strStartDate, String strEndDate, String strCoffee, String strName) {
-        List<Order_list> list = orderDaoV2.doSerch(strStartDate,strEndDate, strCoffee,strName );
+    public List<Order_list> doSearch(String strStartDate, String strEndDate, String strCoffee, String strName) {
+        List<Order_list> list = orderDaoV2.doSearch(strStartDate,strEndDate, strCoffee,strName );
         return list;
     }
 }

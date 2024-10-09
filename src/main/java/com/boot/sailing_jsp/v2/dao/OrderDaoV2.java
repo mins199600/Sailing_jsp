@@ -9,5 +9,5 @@ public interface OrderDaoV2 {
     List<Order_list> doList();
 
     /* 조회하기 */
-    List<Order_list> doSerch(String strStartDate, String strEndDate, String strCoffee, String strName);
+    List<Order_list> doSearch(String strStartDate, String strEndDate, String strCoffee, String strName);
 }
