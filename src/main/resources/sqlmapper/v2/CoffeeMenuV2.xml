@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hello.sailing_jsp.v2.dao.MenuDaoV2">
+
+    <!--조회-->
+    <select id="doList" resultType="hello.sailing_jsp.v2.vo.Coffee_menu">
+        select no,
+               coffee,
+               kind,
+               price,
+            date_format(reg_day,'%Y,%m,%d') as reg_day,
+            date_format(mod_day,'%y,%m,%d') as mod_day
+        from coffee_menu
+    </select>
+
+    <!--검색에 의한 쿼리-->
+    <select id="doSearch" resultType="hello.sailing_jsp.v2.vo.Coffee_menu">
+    select  no,
+            coffee,
+            kind,
+            price,
+        date_format(reg_day,'%Y,%m,%d')as reg_day,
+        date_format(mod_day,'%y,%m,%d')as mod_day
+    from coffee_menu
+    where 1=1
+        and reg_day >= date_format( #{strStartDate}, '%Y,%m,%d')
+        and reg_day &lt; date_add(date_format(#{strEndDate}, '%Y,%m,%d'), interval +1 day)
+            <if test="strCoffee != 'ALL'">
+                and coffee like concat('%',#{strCoffee},'%')
+            </if>
+            <if test="strKind != 'ALL'">
+            and kind = #{strKind}
+            </if>
+</select>
+
+    <!--메뉴조회-->
+    <select id="doListOne" resultType="java.util.Map">
+        select no,
+        coffee,
+        kind,
+        price,
+        date_format(reg_day,'%Y,%m,%d')as reg_day,
+        date_format(mod_day,'%y,%m,%d')as mod_day
+        from coffee_menu
+        where no = cast(#{strNo} as Integer)
+    </select>
+
+
+    <insert id="doInsert">
+        Insert Into coffee_menu(coffee,kind,price)
+        values(#{coffee},#{kind},cast(#{price} as Integer))
+    </insert>
+
+    <update id="doUpdate">
+        update coffee_menu set
+            coffee = #{coffee},
+            kind = #{kind},
+            price = cast(#{price} as Integer)
+        where no = cast(#{no} as Integer)
+    </update>
+
+    <delete id="doDelete">
+        Delete from coffee_menu where no = cast(#{strNo} as Integer)
+    </delete>
+
+    <!--메뉴 가격 수정 입력-->
+    <update id="doUpdatePrice">
+        update coffee_menu set
+            price = cast(#{strPrice} as integer)
+        where no = cast(#{strNo} as integer)
+    </update>
+
+    <!--가격 로그 입력-->
+    <insert id="doInsertLog">
+        insert into coffee_menu_log(coffee_no, price)
+        values( #{strNo}, cast(#{strPrice} as integer) )
+    </insert>
+
+
+    <!--메뉴 가격 수정 원쿼리로 처리-->
+    <update id="doUpdatePriceOne">
+        update coffee_menu set
+        price = cast(#{strPrice} as integer)
+        <where>
+            <foreach item="item" index="index" collection="chkList" open="no in (" separator="," close=")" nullable="true">
+                #{item}
+            </foreach>
+        </where>
+    </update>
+
+    <!--가격 로그 입력 원쿼리-->
+    <insert id="doInsertLogOne">
+        insert into coffee_menu_log(coffee_no, price)
+        <foreach item="item" index="index" collection="chkList" separator="union all" nullable="true">
+            select #{item}, cast(#{strPrice} as integer) from dual
+        </foreach>
+    </insert>
+
+    <!--boot 로그 입력-->
+    <insert id="doBootLog">
+        insert into boot_log (class)
+        values( #{strClass} )
+    </insert>
+
+</mapper>

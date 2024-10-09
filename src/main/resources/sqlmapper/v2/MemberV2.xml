@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hello.sailing_jsp.v2.dao.MemberDaoV2">
+    <select id="doList" resultType="hello.sailing_jsp.v2.vo.Cust_info">
+        select no, name, cust_id, email, role,
+        date_format(reg_day,'%Y%m%d') as reg_day
+        from Cust_info;
+    </select>
+    <!--검색쿼리-->
+    <select id="doSearch" resultType="hello.sailing_jsp.v2.vo.Cust_info">
+        SELECT no, cust_id, name, email, role,
+        DATE_FORMAT(reg_day,'%Y.%m.%d') AS reg_day
+        FROM cust_info
+        WHERE 1=1
+        AND reg_day >= DATE_FORMAT( #{strStartDate},'%Y%m%d')
+        AND reg_day &lt; DATE_ADD(DATE_FORMAT(#{strEndDate},'%Y%m%d'), INTERVAL +1 DAY)
+        <if test="strName != 'ALL'">
+            AND name like CONCAT('%',#{strName},'%')
+        </if>
+    </select>
+</mapper>
