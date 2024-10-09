@@ -25,8 +25,8 @@
       <fieldset>
 
         <legend> [검색조건] </legend>
-        <label>등록기간</label><input type="date" id="start_date" name="start_date" min="2020-01-01" max="2023-12-31">
-        - <input type="date" id="end_date" name="end_date" min="2020-01-01" max="2023-12-31">
+        <label>등록기간</label><input type="date" id="start_date" name="start_date" min="2024-01-01" max="2024-12-31">
+        - <input type="date" id="end_date" name="end_date" min="2024-01-01" max="2024-12-31">
         &nbsp;&nbsp;
         <label>메뉴명</label> <input type="text" id="coffee" name="coffee">
         &nbsp;&nbsp;
@@ -72,10 +72,10 @@
 
     <tr th:each="prod : ${list}">
       <td><input type="checkbox" name="chkCoffeeNo" th:value="${prod.getNo()}"></td>
-      <td th:text="${prod.getNo()}">커피No</th>
+      <td th:text="${prod.getNo()}">커피No</td>
       <td th:text="${prod.getCoffee()}">메뉴명</td>
       <td th:text="${prod.getKind()}">종류</td>
-      <td th:text="${#numbers.formatInteger(prod.getPrice(),0,'COMMA')}">가격</td>
+      <td th:text="${numbers.formatInteger(prod.getPrice(),0,'COMMA')}">가격</td>
       <td th:text="${prod.getReg_day()}">등록일</td>
       <td th:text="${prod.getMod_day()}">수정일</td>
       <td><a th:href="@{/v2/menu_up(no=${prod.getNo()})}">수정</a></td>
