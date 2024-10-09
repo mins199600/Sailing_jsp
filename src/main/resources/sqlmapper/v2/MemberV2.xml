@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hello.sailing_jsp.v2.dao.MemberDaoV2">
-    <select id="doList" resultType="hello.sailing_jsp.v2.vo.Cust_info">
+<mapper namespace="com.boot.sailing_jsp.v2.dao.MemberDaoV2">
+    <select id="doList" resultType="com.boot.sailing_jsp.v2.vo.Cust_info">
         select no, name, cust_id, email, role,
         date_format(reg_day,'%Y%m%d') as reg_day
         from Cust_info;
     </select>
     <!--검색쿼리-->
-    <select id="doSearch" resultType="hello.sailing_jsp.v2.vo.Cust_info">
+    <select id="doSearch" resultType="com.boot.sailing_jsp.v2.vo.Cust_info">
         SELECT no, cust_id, name, email, role,
         DATE_FORMAT(reg_day,'%Y.%m.%d') AS reg_day
         FROM cust_info

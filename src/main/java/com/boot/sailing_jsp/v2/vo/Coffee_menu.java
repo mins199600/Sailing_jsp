@@ -10,5 +10,4 @@ public class Coffee_menu{
     private String price;
     private String reg_day;
     private String mod_day;
-
 }

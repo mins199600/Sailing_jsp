@@ -9,9 +9,9 @@ public class JdbcMariaDbConn {
 
     public void doConn() {
         String driver = "org.mariadb.jdbc.Driver";
-        String dbURL = "jdbc:mariadb://localhost:3307/boot";
-        String user_id = "boot";
-        String user_pw = "boot";
+        String dbURL = "jdbc:mariadb://localhost:3306/boot";
+        String user_id = "root";
+        String user_pw = "1234";
         String qry = "";
         int result = 0;
 
